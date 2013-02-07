@@ -1,0 +1,23 @@
+This caches a bunch of data into the resque parent process and then accesses it
+in the worker. This is designed to test the memory sharing semantics of resque
+parent / child forking and see if this could be a possible solution to some of
+our RAM pains around the canned_reports system.
+
+## Install:
+
+Be sure you have a running redis.
+
+  bundle
+
+## Start the sinatra rack app
+
+  $ rackup
+
+## start the worker:
+
+  $ QUEUE=* rake resque:work
+
+## Enqueue a job
+
+Visit http://localhost:9292/ or whatever your rack app started under.
+
